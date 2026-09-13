@@ -1,0 +1,156 @@
+{
+  "app_name": "HanziPals",
+  "personality": "4 Tactile / Playful LIGHT",
+  "personality_one_liner": "A chunky, highly-tactile, cheerful space built of friendly, oversized modules that reward exploration and make handwriting feel like play.",
+  "color": {
+    "surface": "#FDFBF7",
+    "onSurface": "#1F2937",
+    "surfaceSecondary": "#FFFFFF",
+    "onSurfaceSecondary": "#1F2937",
+    "surfaceTertiary": "#F3F4F6",
+    "onSurfaceTertiary": "#4B5563",
+    "surfaceInverse": "#1F2937",
+    "onSurfaceInverse": "#FFFFFF",
+    "brand": "#10B981",
+    "onBrand": "#FFFFFF",
+    "brandPrimary": "#10B981",
+    "onBrandPrimary": "#FFFFFF",
+    "brandSecondary": "#F43F5E",
+    "onBrandSecondary": "#FFFFFF",
+    "brandTertiary": "#FBBF24",
+    "onBrandTertiary": "#78350F",
+    "success": "#22C55E",
+    "onSuccess": "#FFFFFF",
+    "warning": "#EAB308",
+    "onWarning": "#FFFFFF",
+    "error": "#EF4444",
+    "onError": "#FFFFFF",
+    "info": "#10B981",
+    "onInfo": "#FFFFFF",
+    "border": "#E5E7EB",
+    "borderStrong": "#D1D5DB",
+    "divider": "#F3F4F6",
+    "muted": "#6B7280"
+  },
+  "typography": {
+    "displayFontFamily": "Nunito",
+    "textFontFamily": "Nunito",
+    "scale": {
+      "sm": 12,
+      "base": 16,
+      "lg": 20,
+      "xl": 24,
+      "2xl": 32
+    }
+  },
+  "spacing": {
+    "rule": "Generous spacing to prevent accidental taps for children. Minimum touch target height must be 64px.",
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 24,
+    "2xl": 32,
+    "3xl": 48
+  },
+  "radius_tokens": {
+    "sm": 8,
+    "md": 16,
+    "lg": 24,
+    "pill": 999
+  },
+  "shadow_tier": "2",
+  "navigation": "stack_only",
+  "icon_set": "Feather",
+  "glassmorphism": {
+    "enabled": "false",
+    "do's": [],
+    "dont's": ["Do not use blur/glass on kid interfaces; keep surfaces solid, chunky, and highly contrasted for distinct tactile modules."]
+  },
+  "platform_libraries": {
+    "glass": {
+      "ios": "expo-glass-effect",
+      "android": "expo-blur",
+      "low_end_android_fallback": "solid surfaceSecondary"
+    },
+    "image": "expo-image",
+    "blur": "expo-blur",
+    "bottom_sheet": "@gorhom/bottom-sheet",
+    "animation": "react-native-reanimated",
+    "gesture": "react-native-gesture-handler"
+  },
+  "haptics": {
+    "events": {
+      "mode_toggle": "selection",
+      "stroke_correct": "light",
+      "stroke_error": "heavy",
+      "word_complete": "success",
+      "pin_keypress": "light"
+    }
+  },
+  "screens": [
+    {
+      "name": "ProfilePicker",
+      "purpose": "A welcoming, zero-friction entry screen for kids to tap their avatar, and a hidden top-corner gateway for parents.",
+      "states": {
+        "loading": "Centered bouncing mascot icon.",
+        "empty": "No kids added yet. Show a friendly 'Add Kid' large dashed pill.",
+        "error": "Error loading profiles."
+      },
+      "layout": "Grid of massive, rounded cards (minimum 120x120px) displaying animal avatars and large names. 64px 'Add Profile' CTA. A discrete, muted icon in the top-right triggers the Parent PIN modal."
+    },
+    {
+      "name": "KidDashboard",
+      "purpose": "Shows daily progress at a glance and lists the available handwriting lessons (word lists).",
+      "states": {
+        "loading": "Chunky skeleton blocks.",
+        "empty": "Illustration of an open book with 'Ask parent to add words!'",
+        "error": "Failed to load lessons."
+      },
+      "layout": "Top section: Daily practice goal (Circular progress indicator in Mustard Yellow) alongside a trophy badge. Below: 2-column grid of word list cards (e.g., 森林, 兔子). Each card must have pill-shaped 'Play' buttons. Cards are surfaceSecondary with soft shadows."
+    },
+    {
+      "name": "PracticeScreen",
+      "purpose": "The core tablet workspace holding the hanzi-writer WebView, multi-mode toggles, and gamification rewards.",
+      "states": {
+        "loading": "Drawing grid...",
+        "empty": "N/A - loaded directly with character data.",
+        "error": "Failed to load character engine. Show retry button."
+      },
+      "layout": "Tablet-optimized layout. Top header: Large Pinyin and English meaning with a chunky Coral 'Pronounce' icon button. Center: The Tianzige/Mizige grid (WebView minimum 320x320px) framed in a surfaceSecondary container with borderStrong. Right edge: Vertical stack of 1-3 reward stars. Bottom: 3-tier mode toggle (Demonstrate, Trace, Test) presented as massive pill segments. Bottom corners contain Next/Previous buttons utilizing animal mascot icons."
+    },
+    {
+      "name": "ParentMode",
+      "purpose": "A utility interface strictly for adding/editing Chinese word lists and managing kid profiles, secured by PIN.",
+      "states": {
+        "loading": "Standard spinner.",
+        "empty": "No custom lists. 'Create your first word list'.",
+        "error": "Standard error alert."
+      },
+      "layout": "Visually isolated from the kid experience (use surfaceTertiary backgrounds). Simple, structured single-column lists. Text inputs for adding characters (split into single character cards). Standard table layouts for progress tracking."
+    }
+  ],
+  "images": {
+    "avatar_panda": {
+      "url": "https://images.unsplash.com/photo-1693997449363-66af4eaf9c9a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzOTB8MHwxfHNlYXJjaHwxfHxjdXRlJTIwcGFuZGElMjB0b3l8ZW58MHx8fHwxNzg5MzMyNjM1fDA&ixlib=rb-4.1.0&q=85",
+      "alt": "cute panda toy avatar"
+    },
+    "avatar_tiger": {
+      "url": "https://images.unsplash.com/photo-1771339789751-ba7bfe93ca30?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTB8MHwxfHNlYXJjaHwxfHxjdXRlJTIwdGlnZXIlMjBwbHVzaHxlbnwwfHx8fDE3ODkzMzI2MzV8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "cute tiger plush avatar"
+    },
+    "badge_trophy": {
+      "url": "https://images.unsplash.com/photo-1578269174936-2709b6aeb913?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwxfHxnb2xkJTIwdHJvcGh5fGVufDB8fHx8MTc4OTMzMjYzNXww&ixlib=rb-4.1.0&q=85",
+      "alt": "gold trophy badge"
+    }
+  },
+  "instructions_to_main_agent": [
+    "Strictly follow the Tactile/Playful LIGHT personality (4). No dark mode needed unless explicitly requested, as this is an early learning app.",
+    "Implement the 'hanzi-writer' inside a WebView component, sizing it at least 320x320px with the Tianzige background drawn beneath or within the canvas.",
+    "Ensure the Parent Mode is visually 'boring' compared to the kid mode (using gray/neutral surfaces) so children do not feel compelled to interact with it.",
+    "For all kid-facing interactive elements, set the touch target to a minimum of 64px to support developing motor skills.",
+    "Integrate 'canvas-confetti' and soft audio feedback based on the character completion/error triggers. Wire these alongside the Haptic events.",
+    "Avoid any use of banned colors (all shades of Blue except the specific Mint/Coral accents chosen here). Note: The brand colors deliberately avoid blue/indigo to maintain compliance with <Colors> while remaining child-friendly.",
+    "Ensure 'Nunito' is loaded as the global text and display font via expo-font."
+  ]
+}

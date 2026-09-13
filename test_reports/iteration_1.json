@@ -1,0 +1,29 @@
+{
+  "summary": "Frontend-only E2E test of HanziPals (Expo web preview) on tablet viewport 768x1024. All 11 requested flows verified successfully: Profile Picker (Mia + Add Kid), Add Kid modal (Leo created), Parent PIN gate (wrong PIN keeps modal open with error dot; 1234 navigates to Parent Mode), Kid Dashboard (goal ring 0/5, 0-day streak, 5 badges, 2 seeded word-list cards with Play), Practice screen (pinyin 'sēn', English 'Forest', counter '1 / 6 · Nature 大自然', voice chips zh-CN/zh-HK, Pronounce, 3 mode pills, stars column, Back/Next mascots, hanzi-board iframe loads with window.HZ defined and SVG rendered — no 'react-native-webview not supported' text), mode switching (demonstrate/trace/test all reload board without crash), Next advances 'sēn' -> 'lín' and Prev returns, Parent Mode lists both seeded lists with edit/delete, List editor (name + icon + '你好 世界' -> live preview of 4 cards -> save adds TEST_Greetings), delete-list confirm modal + confirm-delete-yes removes it, daily goal stepper (goal-plus / goal-minus) works, Change PIN opens set-PIN modal. No React Native red screens, no crashes, no deprecated packages (expo-av / expo-barcode-scanner / expo-background-fetch not present).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "global", "issues": ["Minor RN Web deprecation warnings in console: 'shadow*' style props are deprecated (use boxShadow) and 'props.pointerEvents is deprecated' (use style.pointerEvents). Non-blocking but should be migrated in a future cleanup."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [
+    "(Optional cleanup) Replace shadow* style props with boxShadow in StyleSheet.create objects (e.g. kidCard, goalCard, lessonCard) to silence RN Web deprecation warnings.",
+    "(Optional cleanup) Replace deprecated pointerEvents prop with style.pointerEvents (HanziBoard.web.tsx loading overlay uses pointerEvents='none')."
+  ],
+  "critical_code_review_comments": [
+    "HanziBoard.web.tsx uses same-origin srcDoc iframe as intended for web preview; window.HZ engine confirmed defined and SVG rendered inside iframe.",
+    "PinModal correctly clears entry and shows error state on wrong PIN, keeps modal open, and navigates only on correct PIN.",
+    "Parent Mode 'Save' button is properly disabled when name is empty or 0 characters (editor-save opacity 0.4)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (frontend-only)", "frontend": "100% (11/11 flows)"},
+  "seed_data_creation": "Added a test kid 'Leo' via Add Kid flow and a test word list 'TEST_Greetings' (你好 世界) which was then deleted. Both seeded lists (Nature 大自然, Animals 动物) and seeded kid (Mia) remain intact.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Local-first app (AsyncStorage on native, IndexedDB on web). Parent PIN default 1234. Use tablet viewport 768x1024. testIDs are consistent with the review spec. The hanzi iframe engine is verified via evaluating frame.contentWindow.HZ and querying svg inside contentDocument — actual pointer-drawn tracing cannot be automated but was not required.",
+  "rca_of_issue": "N/A — no bugs found in the requested flows."
+}
